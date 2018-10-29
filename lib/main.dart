@@ -46,27 +46,42 @@ class TodoListState extends State<TodoList> {
       return new Scaffold(
           appBar: new AppBar(
             title: new Text("Add a new task"),
+            actions: <Widget>[
+              IconButton(
+                icon: new Icon(
+                  Icons.tune,
+                  semanticLabel: "reset",
+                ),
+                onPressed: (){
+                  print("reset button pressed");
+                },
+              )
+            ], 
           ),
           body: new Container(
             margin: const EdgeInsets.only(left: 30.0, right: 30.0),
             child: new Column(
               children: <Widget>[
-                new DropdownButton<String>(
-                  items: <String>[
-                    "Business",
-                    "Personal",
-                    "Family",
-                    "Uncategorized"
-                  ].map((String value){
-                    return new DropdownMenuItem<String>(
-                      value: value,
-                      child: new Text(value),
-                    );
-                  }).toList(),
-                  onChanged: (_){
-
-                  }
-                ),
+                new Container(                    
+                    width: double.infinity,          
+                    height: 80.0,
+                    child: new DropdownButton<String>(    
+                      style: new TextStyle(
+                        height: double.infinity
+                      ),                
+                      value: null,                      
+                        items: <String>[
+                          "Business",
+                          "Personal",
+                          "Family",
+                          "Uncategorized"
+                        ].map((String value) {
+                          return new DropdownMenuItem<String>(
+                            value: value,
+                            child: new Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (_) {})),
                 new SizedBox(height: 12.0),
                 new TextField(
                   autofocus: true,
