@@ -4,9 +4,13 @@ void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(title: 'Flutter Demo', home: new TodoList());
+    return new MaterialApp(
+        title: 'Flutter Demo',
+        home: new TodoList(),
+        debugShowCheckedModeBanner: false);
   }
 }
 
@@ -52,36 +56,59 @@ class TodoListState extends State<TodoList> {
                   Icons.tune,
                   semanticLabel: "reset",
                 ),
-                onPressed: (){
+                onPressed: () {
                   print("reset button pressed");
                 },
               )
-            ], 
+            ],
           ),
           body: new Container(
             margin: const EdgeInsets.only(left: 30.0, right: 30.0),
             child: new Column(
               children: <Widget>[
-                new Container(                    
-                    width: double.infinity,          
-                    height: 80.0,
-                    child: new DropdownButton<String>(    
-                      style: new TextStyle(
-                        height: double.infinity
-                      ),                
-                      value: null,                      
-                        items: <String>[
-                          "Business",
-                          "Personal",
-                          "Family",
-                          "Uncategorized"
-                        ].map((String value) {
-                          return new DropdownMenuItem<String>(
-                            value: value,
-                            child: new Text(value),
-                          );
-                        }).toList(),
-                        onChanged: (_) {})),
+                new SizedBox(height: 50.0),
+                new Center(
+                  child: new Container(
+                    padding: const EdgeInsets.all(10.0),
+                    decoration: new BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.blue,
+                    ),
+                    child: Icon(
+                      Icons.work,
+                      size: 50.0,
+                    ),
+                  ),
+                ),
+                new SizedBox(height: 12.0),
+                new Container(
+                  width: double.infinity,
+                  decoration: new BoxDecoration(
+                    border: new Border(
+                      top: BorderSide(color: Colors.transparent),
+                      left: BorderSide(color: Colors.transparent),
+                      right: BorderSide(color: Colors.transparent),
+                      bottom: BorderSide(color: Colors.grey),
+                    ),
+                  ),
+                  child: new DropdownButton<String>(                    
+                      value: "Business",
+                      items: <String>[
+                        "Business",
+                        "Personal",
+                        "Family",
+                        "Uncategorized"
+                      ].map((String value) {
+                        return new DropdownMenuItem<String>(
+                          value: value,
+                          child: new Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        setState() {}
+                      },
+                      hint: new Text("Select Task Type")),
+                ),
                 new SizedBox(height: 12.0),
                 new TextField(
                   autofocus: true,
