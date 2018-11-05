@@ -40,8 +40,33 @@ class TodoListState extends State<TodoList> {
   }
 
   Widget _buildTodoItem(String todoText) {
-    return new ListTile(
-      title: new Text(todoText),
+    return new Container(
+      padding: EdgeInsets.only(left: 20.0, right: 20.0),
+      child: new Column(
+        children: <Widget>[
+          new ListTile(
+            title: new Text(
+              todoText,
+              style: TextStyle(fontWeight: FontWeight.w600),
+            ),
+            subtitle: new Text("Additional info about task"),
+            leading: new Container(
+              padding: const EdgeInsets.all(5.0),
+              decoration: new BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.transparent,          
+                border: Border.all(color: Colors.grey, width: 1.0)     
+              ),
+              child: new Icon(
+                Icons.work,
+                 color: Colors.blue,
+                 ),
+            ),
+            trailing: new Text("9am"),
+          ),
+          new Divider(color: Colors.grey)
+        ],
+      ),
     );
   }
 
@@ -83,15 +108,7 @@ class TodoListState extends State<TodoList> {
                 new SizedBox(height: 12.0),
                 new Container(
                   width: double.infinity,
-                  decoration: new BoxDecoration(
-                    border: new Border(
-                      top: BorderSide(color: Colors.transparent),
-                      left: BorderSide(color: Colors.transparent),
-                      right: BorderSide(color: Colors.transparent),
-                      bottom: BorderSide(color: Colors.grey),
-                    ),
-                  ),
-                  child: new DropdownButton<String>(                    
+                  child: DropdownButton<String>(
                       value: "Business",
                       items: <String>[
                         "Business",
@@ -101,12 +118,16 @@ class TodoListState extends State<TodoList> {
                       ].map((String value) {
                         return new DropdownMenuItem<String>(
                           value: value,
-                          child: new Text(value),
+                          child: new Text(
+                            value,
+                            style: TextStyle(fontSize: 15.0),
+                          ),
                         );
                       }).toList(),
                       onChanged: (value) {
                         setState() {}
                       },
+                      isExpanded: true,
                       hint: new Text("Select Task Type")),
                 ),
                 new SizedBox(height: 12.0),
@@ -117,20 +138,20 @@ class TodoListState extends State<TodoList> {
                     Navigator.pop(context);
                   },
                   decoration: new InputDecoration(
-                    hintText: "Task",
-                  ),
+                      // hintText: "Task",
+                      labelText: "Task"),
                 ),
                 new SizedBox(height: 12.0),
                 new TextField(
                   decoration: new InputDecoration(
-                    hintText: "Place",
-                  ),
+                      // hintText: "Place",
+                      labelText: "Place"),
                 ),
                 new SizedBox(height: 12.0),
                 new TextField(
                   decoration: new InputDecoration(
-                    hintText: "Time",
-                  ),
+                      // hintText: "Time",
+                      labelText: "Time"),
                 ),
                 new SizedBox(height: 30.0),
                 new ButtonTheme(
@@ -157,7 +178,20 @@ class TodoListState extends State<TodoList> {
       appBar: new AppBar(
         title: new Text("Todo App"),
       ),
-      body: _buildTodoList(),
+      body: new CustomScrollView(
+        slivers: <Widget>[
+          new SliverAppBar(
+            expandedHeight: 150.0,
+            flexibleSpace: new FlexibleSpaceBar(
+              title: new Text("Your\nThings"),
+            ),
+          ),
+          new SliverList(
+            delegate: new SliverChildBuilderDelegate((context, index) => _buildTodoList())
+          )
+        ],
+      ),
+      // body: _buildTodoList(),
       floatingActionButton: new FloatingActionButton(
           onPressed: _pushAddTodoScreen,
           tooltip: "Add task",

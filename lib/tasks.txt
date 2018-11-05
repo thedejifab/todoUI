@@ -1,0 +1,2 @@
+remove app bar in main screen
+add completed pane beside FAB
