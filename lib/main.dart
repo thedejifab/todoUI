@@ -179,7 +179,7 @@ class TodoListState extends State<TodoList> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
           return <Widget>[
             SliverAppBar(
-              expandedHeight: 150.0,
+              expandedHeight: 200.0,
               floating: false,
               pinned: false,
               flexibleSpace: FlexibleSpaceBar(
@@ -190,6 +190,7 @@ class TodoListState extends State<TodoList> {
                   color: Colors.white,
                   fontSize: 16.0,)),                
               ),
+              leading: new Icon(Icons.),
             ),
           ];
         },
