@@ -175,23 +175,27 @@ class TodoListState extends State<TodoList> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Todo App"),
-      ),
-      body: new CustomScrollView(
-        slivers: <Widget>[
-          new SliverAppBar(
-            expandedHeight: 150.0,
-            flexibleSpace: new FlexibleSpaceBar(
-              title: new Text("Your\nThings"),
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
+          return <Widget>[
+            SliverAppBar(
+              expandedHeight: 150.0,
+              floating: false,
+              pinned: false,
+              flexibleSpace: FlexibleSpaceBar(
+                centerTitle: true,
+                title: new Text(
+                  "Your \nThing",
+                  style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16.0,)),                
+              ),
             ),
-          ),
-          new SliverList(
-            delegate: new SliverChildBuilderDelegate((context, index) => _buildTodoList())
-          )
-        ],
+          ];
+        },
+        body: _buildTodoList(),
       ),
-      // body: _buildTodoList(),
+      
       floatingActionButton: new FloatingActionButton(
           onPressed: _pushAddTodoScreen,
           tooltip: "Add task",
