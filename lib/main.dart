@@ -199,10 +199,21 @@ class TodoListState extends State<TodoList> {
                     'assets/background.jpg',
                     fit: BoxFit.cover,
                   )),
+                  bottom: new TabBar(
+                    tabs: [
+                      new Tab(
+                        new Text("Sep 5, 2018"),
+                      ),
+                      new Tab(
+                        new Text("65% done"),
+                      ),
+                    ],
+                  ),
               // leading: new Icon(Icons.),
               leading: new Icon(Icons.menu),
-              actions: <Widget>[
+              actions: <Widget>[              
                 new SingleChildScrollView(                
+                  // padding: EdgeInsets.only(top: 30.0),                  
                   child: new Container(
                       alignment: Alignment.bottomCenter,
                       child: new Column(
