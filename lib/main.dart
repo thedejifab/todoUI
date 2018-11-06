@@ -53,14 +53,13 @@ class TodoListState extends State<TodoList> {
             leading: new Container(
               padding: const EdgeInsets.all(5.0),
               decoration: new BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.transparent,          
-                border: Border.all(color: Colors.grey, width: 1.0)     
-              ),
+                  shape: BoxShape.circle,
+                  color: Colors.transparent,
+                  border: Border.all(color: Colors.grey, width: 1.0)),
               child: new Icon(
                 Icons.work,
-                 color: Colors.blue,
-                 ),
+                color: Colors.blue,
+              ),
             ),
             trailing: new Text("9am"),
           ),
@@ -176,27 +175,100 @@ class TodoListState extends State<TodoList> {
   Widget build(BuildContext context) {
     return new Scaffold(
       body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
               expandedHeight: 200.0,
               floating: false,
               pinned: false,
               flexibleSpace: FlexibleSpaceBar(
-                centerTitle: true,
-                title: new Text(
-                  "Your \nThing",
-                  style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.0,)),                
+                  centerTitle: true,
+                  title: new Container(
+                      padding: EdgeInsets.only(bottom: 30.0, right: 140.0),
+                      // alignment: Alignment.center,
+                      child: new Opacity(
+                        opacity: 0.95,
+                        child: new Text("Your \nTodos",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25.0,
+                                fontWeight: FontWeight.w400)),
+                      )),
+                  background: new Image.asset(
+                    'assets/background.jpg',
+                    fit: BoxFit.cover,
+                  )),
+              // leading: new Icon(Icons.),
+              leading: new Icon(Icons.menu),
+              actions: <Widget>[
+                new SingleChildScrollView(                
+                  child: new Container(
+                      alignment: Alignment.bottomCenter,
+                      child: new Column(
+                        children: <Widget>[
+                          new Container(
+                            child: new Row(
+                              children: <Widget>[
+                                new Column(
+                                  children: <Widget>[
+                                    new Text(
+                                      "24",
+                                      style: TextStyle(fontSize: 25.0),
+                                    ),
+                                    new Text(
+                                      "Personal",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.grey),
+                                    )
+                                  ],
+                                ),
+                                new SizedBox(
+                                  width: 15.0,
+                                ),
+                                new Column(
+                                  children: <Widget>[
+                                    new Text(
+                                      "15",
+                                      style: TextStyle(fontSize: 25.0),
+                                    ),
+                                    new Text(
+                                      "Business",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.grey),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          new Container(
+                            child: new Text("65% done"),
+                          )
+                        ],
+                      )),
+                )
+              ],
+            ),
+            new SliverPadding(
+              padding: new EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
+              sliver: new SliverList(
+                delegate: new SliverChildListDelegate([
+                  new Text(
+                    "INBOX",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        color: Colors.grey, fontWeight: FontWeight.bold),
+                  ),
+                ]),
               ),
-              leading: new Icon(Icons.),
             ),
           ];
         },
         body: _buildTodoList(),
       ),
-      
       floatingActionButton: new FloatingActionButton(
           onPressed: _pushAddTodoScreen,
           tooltip: "Add task",
