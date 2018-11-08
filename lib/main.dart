@@ -23,19 +23,26 @@ class TodoList extends StatefulWidget {
 class TodoListState extends State<TodoList> {
   List<String> _todoItems = [];
   TimeOfDay _time = new TimeOfDay.now();
+  String label = "Time";
+
+  String _returnTime(TimeOfDay time){
+
+  }
 
   Future<Null> _selectTime(BuildContext context) async {
     final TimeOfDay picked = await showTimePicker(
       context: context,
-      initialTime: _time,
+      initialTime: _time,            
     );
 
-    if (picked != null && picked != _time) {
-      print("Date selected: ${_time.toString}");
+    if (picked != null && picked != _time) {          
       setState(() {
         _time = picked;
-        print(_time);
+        print(_time);    
+        label = " "+_time.hour.toString()+":"+_time.minute.toString()+_time.hourOfPeriod.toString();              
+        print(label);    
       });
+      
     }
   }
 
@@ -107,16 +114,16 @@ class TodoListState extends State<TodoList> {
             child: new Container(
           margin: const EdgeInsets.only(left: 30.0, right: 30.0),
           child: new Column(
-            children: <Widget>[              
+            children: <Widget>[
               new SizedBox(height: 50.0),
-              new Center(                
+              new Center(
                 child: new Container(
                   padding: const EdgeInsets.all(10.0),
                   decoration: new BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.blue,
-                  ),                  
-                  child: Icon(                    
+                  ),
+                  child: Icon(
                     Icons.work,
                     size: 50.0,
                   ),
@@ -146,33 +153,43 @@ class TodoListState extends State<TodoList> {
                     hint: new Text("Select Task Type")),
               ),
               new SizedBox(height: 12.0),
-              new TextField(
-                autofocus: true,
+              new TextField(                                
                 onSubmitted: (task) {
                   _addTodoItem(task);
                   Navigator.pop(context);
                 },
-                decoration: new InputDecoration(
-                    // hintText: "Task",
-                    labelText: "Task"),
+                decoration: new InputDecoration(                  
+                  suffixIcon: new Icon(Icons.work),
+                  labelText: "Task",
+                ),
               ),
               new SizedBox(height: 12.0),
-              new TextField(
+              new TextField(                                
+                maxLength: 50,
                 decoration: new InputDecoration(
-                    // hintText: "Place",
-                    labelText: "Place"),
+                  suffixIcon: new Icon(Icons.place),
+                  labelText: "Place",
+                ),
               ),
               new SizedBox(height: 12.0),
               new GestureDetector(
                 onTap: (){
-                  print("OnTap called for textfield");
+                  _selectTime(context);
                 },
-              child: new TextField(
-                // enabled: false,                
-                decoration: new InputDecoration(
-                    // hintText: "Time",
-                    labelText: "Time"),
+                child: Container(
+                  color: Colors.transparent,
+                  child: IgnorePointer(
+                    child: new TextField(                      
+                      decoration: new InputDecoration(
+                        suffixIcon: new Icon(Icons.calendar_today),
+                        labelText: label,
+                      ),
+                    ),
+                  ),
+                ),
               ),
+              new SizedBox(
+                height: 12.0,
               ),
               new SizedBox(height: 30.0),
               new ButtonTheme(
@@ -186,7 +203,9 @@ class TodoListState extends State<TodoList> {
                       padding: EdgeInsets.all(15.0),
                       color: Colors.blue,
                       splashColor: Colors.blueGrey,
-                      onPressed: () {}))
+                      onPressed: () {
+                        print("ADD Button Clicked");
+                      }))
             ],
           ),
         )),
@@ -241,10 +260,8 @@ class TodoListState extends State<TodoList> {
                       ),
                     ),
                     new Container(
-                      // alignment: Alignment.bottomCenter,
                       child: new Tab(
                         child: new Container(
-                          // padding: EdgeInsets.only(top: 30.0),
                           child: new Container(
                               child: new Column(
                             children: <Widget>[
