@@ -24,26 +24,27 @@ class TodoListState extends State<TodoList> {
   List<String> _todoItems = [];
   TimeOfDay _time = new TimeOfDay.now();
   String label = "Time";
-
-  String _returnTime(TimeOfDay time){
-
-  }
+  
 
   Future<Null> _selectTime(BuildContext context) async {
     final TimeOfDay picked = await showTimePicker(
       context: context,
-      initialTime: _time,            
+      initialTime: _time,
     );
 
-    if (picked != null && picked != _time) {          
-      setState(() {
-        _time = picked;
-        print(_time);    
-        label = " "+_time.hour.toString()+":"+_time.minute.toString()+_time.hourOfPeriod.toString();              
-        print(label);    
-      });
-      
-    }
+    setState(() {
+      _time = picked;
+      print(_time);
+      label = " " +
+          _time.hour.toString() +
+          ":" +
+          _time.minute.toString() +
+          _time.hourOfPeriod.toString();
+      print(label);
+    });
+    // if (picked != null && picked != _time) {
+
+    // }
   }
 
   void _addTodoItem(String task) {
@@ -130,9 +131,9 @@ class TodoListState extends State<TodoList> {
                 ),
               ),
               new SizedBox(height: 12.0),
-              new Container(
+              new Container(                
                 width: double.infinity,
-                child: DropdownButton<String>(
+                child: DropdownButton<String>(                  
                     value: "Business",
                     items: <String>[
                       "Business",
@@ -153,18 +154,19 @@ class TodoListState extends State<TodoList> {
                     hint: new Text("Select Task Type")),
               ),
               new SizedBox(height: 12.0),
-              new TextField(                                
+              new TextField(
                 onSubmitted: (task) {
                   _addTodoItem(task);
                   Navigator.pop(context);
                 },
-                decoration: new InputDecoration(                  
+                maxLength: 25,              
+                decoration: new InputDecoration(
                   suffixIcon: new Icon(Icons.work),
                   labelText: "Task",
                 ),
               ),
               new SizedBox(height: 12.0),
-              new TextField(                                
+              new TextField(
                 maxLength: 50,
                 decoration: new InputDecoration(
                   suffixIcon: new Icon(Icons.place),
@@ -173,13 +175,13 @@ class TodoListState extends State<TodoList> {
               ),
               new SizedBox(height: 12.0),
               new GestureDetector(
-                onTap: (){
+                onTap: () {
                   _selectTime(context);
                 },
                 child: Container(
                   color: Colors.transparent,
                   child: IgnorePointer(
-                    child: new TextField(                      
+                    child: new TextField(
                       decoration: new InputDecoration(
                         suffixIcon: new Icon(Icons.calendar_today),
                         labelText: label,
