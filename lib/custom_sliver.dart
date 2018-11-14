@@ -97,21 +97,3 @@ class CustomSliverBar extends StatelessWidget {
     );
   }
 }
-
-class CustomSliverPadding extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new SliverPadding(
-      padding: new EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
-      sliver: new SliverList(
-        delegate: new SliverChildListDelegate([
-          new Text(
-            "INBOX",
-            textAlign: TextAlign.left,
-            style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
-          ),
-        ]),
-      ),
-    );
-  }
-}
