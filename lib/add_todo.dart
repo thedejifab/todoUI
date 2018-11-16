@@ -4,9 +4,9 @@ import 'utils/todo.dart';
 TodoListState todoListState = new TodoListState();
 Widget addNewTodo(BuildContext context){
   return new Scaffold(
-  // appBar: new AppBar(
-  //   title: new Text("Add new todo"),
-  // ),
+  appBar: new AppBar(
+    title: new Text("Add new todo"),
+  ),
   body: new SingleChildScrollView(
       child: new Container(
       margin: const EdgeInsets.only(left: 30.0, right: 30.0),
