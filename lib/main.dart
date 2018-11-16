@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'todo.dart';
+import 'utils/todo.dart';
 
 void main() => runApp(new MyApp());
 

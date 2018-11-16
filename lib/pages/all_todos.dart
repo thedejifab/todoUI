@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'todo.dart';
-import 'custom_sliver.dart';
+import '../utils/todo.dart';
+import '../widgets/custom_sliver.dart';
+import '../add_todo.dart';
 
 class AllTodosView extends StatelessWidget{
   TodoListState todoListState = new TodoListState();
@@ -34,7 +35,11 @@ class AllTodosView extends StatelessWidget{
         ),
       ),
       floatingActionButton: new FloatingActionButton(
-          onPressed: todoListState.pushAddTodoScreen,
+          onPressed: (){
+            Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+              return addNewTodo(context);
+            }));
+          },
           tooltip: "Add task",
           child: new Icon(Icons.add)),
     );

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'todo.dart';
+import 'utils/todo.dart';
 
-class AddNewTodo extends StatelessWidget {
-  TodoListState todoListState = new TodoListState();
-
-  @override
-  Widget build(BuildContext context) {
-    return new SingleChildScrollView(
+TodoListState todoListState = new TodoListState();
+Widget addNewTodo(BuildContext context){
+  return new Scaffold(
+  // appBar: new AppBar(
+  //   title: new Text("Add new todo"),
+  // ),
+  body: new SingleChildScrollView(
       child: new Container(
       margin: const EdgeInsets.only(left: 30.0, right: 30.0),
       child: new Column(
@@ -52,6 +53,7 @@ class AddNewTodo extends StatelessWidget {
           new TextField(
             onSubmitted: (task) {
               todoListState.addTodoItem(task);
+              // Navigator.of(context).pop(context);
               Navigator.pop(context);
             },
             maxLength: 25,
@@ -105,6 +107,6 @@ class AddNewTodo extends StatelessWidget {
                   }))
         ],
       ),
-    ));
-  }
+    )),
+  );
 }
