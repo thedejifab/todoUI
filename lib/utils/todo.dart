@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import '../widgets/todo_item.dart';
-import '../add_todo.dart';
+import '../pages/add_todo.dart';
 import '../pages/all_todos.dart';
 
 class TodoList extends StatefulWidget {
@@ -48,10 +48,10 @@ class TodoListState extends State<TodoList> {
     return TodoItem(todoText);
   }
 
-  Widget pushAddTodoScreen() {    
-    Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-      return addNewTodo(context);      
-    }));
+  void pushAddTodoScreen() {    
+    // Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+    //   return addNewTodo(context);      
+    // }));
   }
 
   @override

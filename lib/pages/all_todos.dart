@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../utils/todo.dart';
 import '../widgets/custom_sliver.dart';
-import '../add_todo.dart';
+import '../pages/add_todo.dart';
 
 class AllTodosView extends StatelessWidget{
-  TodoListState todoListState = new TodoListState();
+  final TodoListState todoListState = new TodoListState();
   
   @override
   Widget build(BuildContext context){
@@ -36,9 +36,7 @@ class AllTodosView extends StatelessWidget{
       ),
       floatingActionButton: new FloatingActionButton(
           onPressed: (){
-            Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-              return addNewTodo(context);
-            }));
+            Navigator.of(context).push(new MaterialPageRoute(builder: (context) => new AddNewTodo()));
           },
           tooltip: "Add task",
           child: new Icon(Icons.add)),
