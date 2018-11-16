@@ -48,7 +48,7 @@ class TodoListState extends State<TodoList> {
     return TodoItem(todoText);
   }
 
-  Widget pushAddTodoScreen() {
+  Widget pushAddTodoScreen() {    
     Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
       return AddNewTodo();      
     }));
