@@ -33,6 +33,12 @@ class TodoListState extends State<TodoList> {
               Scaffold.of(context).showSnackBar(
                 SnackBar(
                   content: Text("Todo cancelled."),
+                  action: SnackBarAction(                    
+                    label: "UNDO",
+                    onPressed: (){
+
+                    },
+                  ),
                 )                
               );              
             },

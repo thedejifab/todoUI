@@ -43,7 +43,7 @@ class TaskField extends StatelessWidget {
 
   TaskField(this._addTodoItem, this.context);
 
-  Widget taskField(){
+  Widget taskField() {
     return TextField(
       autofocus: true,
       onSubmitted: (task) {
@@ -57,8 +57,7 @@ class TaskField extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {    
-  }
+  Widget build(BuildContext context) {}
 }
 
 Widget placeField() {
@@ -69,12 +68,64 @@ Widget placeField() {
   );
 }
 
+class TimeField extends StatefulWidget {
+  @override
+  createState() => new TimeFieldState();
+}
+
+class TimeFieldState extends State<TimeField> {
+  TimeOfDay _time = new TimeOfDay.now();
+  String timeLabel = "Time";
+
+  Future<Null> selectTime(BuildContext context) async {
+    final TimeOfDay picked = await showTimePicker(
+      context: context,
+      initialTime: _time,
+    );
+
+    if (picked != _time && picked != null) {
+      setState(() {
+        _time = picked;
+      });
+    }
+  }
+
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        selectTime(context);
+      },
+      child: Container(
+        color: Colors.transparent,
+        child: IgnorePointer(
+          child: new TextField(
+            decoration: new InputDecoration(
+              suffixIcon: new Icon(Icons.calendar_today),
+              labelText: _time.toString(),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 Widget timeField() {
-  return TextField(
-    decoration: InputDecoration(
-        // hintText: "Time",
-        labelText: "Time"),
-  );
+//   return GestureDetector(
+//               onTap:() {
+//                 todoListState.selectTime(context);
+//               },
+//               child:Container(
+//                 color:Colors.transparent,
+//                 child:IgnorePointer(
+//                   child:new TextField(
+//                     decoration:new InputDecoration(
+//                       suffixIcon:new Icon(Icons.calendar_today),
+//                       labelText:todoListState.time.toString(),
+//                     ),
+//                   ),
+//                 ),
+// ),
 }
 
 Widget addButton() {

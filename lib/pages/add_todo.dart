@@ -8,21 +8,22 @@ class AddTodo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text("Add a new task"),
-          actions: <Widget>[
-            IconButton(
-              icon: new Icon(
-                Icons.tune,
-                semanticLabel: "reset",
-              ),
-              onPressed: () {
-                print("reset button pressed");
-              },
-            )
-          ],
-        ),
-        body: new Container(
+      appBar: new AppBar(
+        title: new Text("Add a new task"),
+        actions: <Widget>[
+          IconButton(
+            icon: new Icon(
+              Icons.tune,
+              semanticLabel: "reset",
+            ),
+            onPressed: () {
+              print("reset button pressed");
+            },
+          )
+        ],
+      ),
+      body: new SingleChildScrollView(
+        child: Container(
           margin: const EdgeInsets.only(left: 30.0, right: 30.0),
           child: new Column(
             children: <Widget>[
@@ -37,11 +38,13 @@ class AddTodo extends StatelessWidget {
               new SizedBox(height: 12.0),
               placeField(),
               new SizedBox(height: 12.0),
-              timeField(),
+              TimeField(),
               new SizedBox(height: 30.0),
               addButton(),
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
