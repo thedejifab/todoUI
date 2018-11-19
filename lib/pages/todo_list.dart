@@ -13,27 +13,16 @@ class TodoList extends StatefulWidget {
 class TodoListState extends State<TodoList> {
   List<Todo> _todoList = [];
 
-  void _addTodoItem(String task) {
+  void _addTodoItem(String task, String place) {
     setState(() {
       int index = _todoList.length;
       _todoList.add(
-          Todo(task: task, category: "Biz", place: "Ikorodu", time: "12:30pm"));
+          Todo(task: task, category: "Biz", place: place, time: "12:30pm"));
     });
   }
 
-  void _deleteItem(index, item) {
-    setState(() {
-      _todoList.removeAt(index);
-      Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text("Todo deleted."),
-        action: SnackBarAction(
-          label: "UNDO",
-          onPressed: () {
-            _undoDeleteItem(index, item);
-          },
-        ),
-      ));
-    });
+  void _deleteItem(index) {
+    _todoList.removeAt(index);
   }
 
   void _undoDeleteItem(index, item) {
@@ -54,7 +43,18 @@ class TodoListState extends State<TodoList> {
                 _todoList[index].time, _todoList[index].category),
             onDismissed: (direction) {
               var item = _todoList.elementAt(index);
-              _deleteItem(index, item);
+              setState(() {
+                _deleteItem(index);
+                Scaffold.of(context).showSnackBar(SnackBar(
+                  content: Text("Todo deleted."),
+                  action: SnackBarAction(
+                    label: "UNDO",
+                    onPressed: () {
+                      _undoDeleteItem(index, item);
+                    },
+                  ),
+                ));
+              });
             },
           );
         }

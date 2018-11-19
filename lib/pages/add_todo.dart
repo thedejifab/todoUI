@@ -25,23 +25,25 @@ class AddTodo extends StatelessWidget {
       body: new SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.only(left: 30.0, right: 30.0),
-          child: new Column(
-            children: <Widget>[
-              new SizedBox(height: 50.0),
-              new Center(
-                child: categoryIcon(),
-              ),
-              new SizedBox(height: 12.0),
-              categoryDropdown(),
-              new SizedBox(height: 12.0),
-              TaskField(_addTodoItem, context).taskField(),
-              new SizedBox(height: 12.0),
-              placeField(),
-              new SizedBox(height: 12.0),
-              TimeField(),
-              new SizedBox(height: 30.0),
-              addButton(),
-            ],
+          child: Form(
+            child: new Column(
+              children: <Widget>[
+                new SizedBox(height: 50.0),
+                new Center(
+                  child: categoryIcon(),
+                ),
+                new SizedBox(height: 12.0),
+                categoryDropdown(),
+                new SizedBox(height: 12.0),
+                taskField(context),
+                new SizedBox(height: 12.0),
+                placeField(),
+                new SizedBox(height: 12.0),
+                TimeField(),
+                new SizedBox(height: 30.0),
+                SubmitTodo(_addTodoItem, context).addButton(),
+              ],
+            ),
           ),
         ),
       ),

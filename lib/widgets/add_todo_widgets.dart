@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+TextEditingController taskController = TextEditingController();
+TextEditingController placeController = TextEditingController();
+TextEditingController timeController = TextEditingController();
+
 Widget categoryIcon() {
   return Container(
     padding: const EdgeInsets.all(10.0),
@@ -37,34 +41,51 @@ Widget categoryDropdown() {
   );
 }
 
-class TaskField extends StatelessWidget {
+FocusNode textNode2 = new FocusNode();
+Widget taskField(context) {
+  return TextFormField(    
+    autofocus: true,
+    controller: taskController,
+    decoration: InputDecoration(labelText: "Task"),
+    onFieldSubmitted: (String value){
+      FocusScope.of(context).requestFocus(textNode2);
+    },
+  );
+}
+
+class SubmitTodo extends StatelessWidget {
   final Function _addTodoItem;
   final BuildContext context;
 
-  TaskField(this._addTodoItem, this.context);
+  SubmitTodo(this._addTodoItem, this.context);
 
-  Widget taskField() {
-    return TextField(
-      autofocus: true,
-      onSubmitted: (task) {
-        _addTodoItem(task);
-        Navigator.pop(context);
-      },
-      decoration: InputDecoration(
-          // hintText: "Task",
-          labelText: "Task"),
-    );
+  Widget addButton() {
+    return ButtonTheme(
+        minWidth: double.infinity,
+        child: RaisedButton(
+            child: Text(
+              "ADD  TODO",
+              style: TextStyle(color: Colors.white),
+            ),
+            elevation: 4.0,
+            padding: EdgeInsets.all(15.0),
+            color: Colors.blue,
+            splashColor: Colors.blueGrey,
+            onPressed: () {
+              _addTodoItem(taskController.text, placeController.text);
+              Navigator.pop(context);
+            }));
   }
 
   @override
   Widget build(BuildContext context) {}
 }
 
-Widget placeField() {
-  return TextField(
-    decoration: InputDecoration(
-        // hintText: "Place",
-        labelText: "Place"),
+Widget placeField() {  
+  return TextFormField(
+    focusNode: textNode2,  
+    controller: placeController,  
+    decoration: InputDecoration(labelText: "Place"),
   );
 }
 
@@ -98,7 +119,8 @@ class TimeFieldState extends State<TimeField> {
       child: Container(
         color: Colors.transparent,
         child: IgnorePointer(
-          child: new TextField(
+          child: new TextFormField(
+            controller: timeController,
             decoration: new InputDecoration(
               suffixIcon: new Icon(Icons.calendar_today),
               labelText: _time.toString(),
@@ -110,35 +132,3 @@ class TimeFieldState extends State<TimeField> {
   }
 }
 
-Widget timeField() {
-//   return GestureDetector(
-//               onTap:() {
-//                 todoListState.selectTime(context);
-//               },
-//               child:Container(
-//                 color:Colors.transparent,
-//                 child:IgnorePointer(
-//                   child:new TextField(
-//                     decoration:new InputDecoration(
-//                       suffixIcon:new Icon(Icons.calendar_today),
-//                       labelText:todoListState.time.toString(),
-//                     ),
-//                   ),
-//                 ),
-// ),
-}
-
-Widget addButton() {
-  return ButtonTheme(
-      minWidth: double.infinity,
-      child: RaisedButton(
-          child: Text(
-            "ADD  TODO",
-            style: TextStyle(color: Colors.white),
-          ),
-          elevation: 4.0,
-          padding: EdgeInsets.all(15.0),
-          color: Colors.blue,
-          splashColor: Colors.blueGrey,
-          onPressed: () {}));
-}
