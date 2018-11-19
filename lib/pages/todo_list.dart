@@ -23,24 +23,27 @@ class TodoListState extends State<TodoList> {
     return new ListView.builder(
       itemBuilder: (context, index) {
         if (index < _todoItems.length) {
-          return Dismissible( 
+          return Dismissible(
             background: _stackBehindDismiss(),
             direction: DismissDirection.endToStart,
-            key: Key(_todoItems[index]),           
-            child: buildTodoItem(_todoItems[index]),            
-            onDismissed: (direction){
-              _todoItems.removeAt(index);
-              Scaffold.of(context).showSnackBar(
-                SnackBar(
+            key: ObjectKey(_todoItems[index]),
+            child: buildTodoItem(_todoItems[index]),
+            onDismissed: (direction) {
+              var item = _todoItems.elementAt(index).toString();
+              setState(() {
+                _todoItems.removeAt(index);
+                Scaffold.of(context).showSnackBar(SnackBar(
                   content: Text("Todo cancelled."),
-                  action: SnackBarAction(                    
+                  action: SnackBarAction(
                     label: "UNDO",
-                    onPressed: (){
-
+                    onPressed: () {
+                      setState(() {
+                        _todoItems.insert(index, item);
+                      });
                     },
                   ),
-                )                
-              );              
+                ));
+              });
             },
           );
         }
@@ -48,14 +51,15 @@ class TodoListState extends State<TodoList> {
     );
   }
 
-  Widget _stackBehindDismiss(){
+  Widget _stackBehindDismiss() {
     return Container(
       alignment: Alignment.centerRight,
       padding: EdgeInsets.only(right: 20.0),
       color: Colors.red,
       child: Icon(
         Icons.delete,
-        color: Colors.white,),
+        color: Colors.white,
+      ),
     );
   }
 
