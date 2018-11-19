@@ -11,15 +11,34 @@ class TodoList extends StatefulWidget {
 }
 
 class TodoListState extends State<TodoList> {
-  List<String> _todoItems = [];
   List<Todo> _todoList = [];
 
   void _addTodoItem(String task) {
     setState(() {
       int index = _todoList.length;
-      // _todoItems.add(task);
       _todoList.add(
           Todo(task: task, category: "Biz", place: "Ikorodu", time: "12:30pm"));
+    });
+  }
+
+  void _deleteItem(index, item) {
+    setState(() {
+      _todoList.removeAt(index);
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text("Todo deleted."),
+        action: SnackBarAction(
+          label: "UNDO",
+          onPressed: () {
+            _undoDeleteItem(index, item);
+          },
+        ),
+      ));
+    });
+  }
+
+  void _undoDeleteItem(index, item) {
+    setState(() {
+      _todoList.insert(index, item);
     });
   }
 
@@ -31,30 +50,11 @@ class TodoListState extends State<TodoList> {
             background: _stackBehindDismiss(),
             direction: DismissDirection.endToStart,
             key: ObjectKey(_todoList[index]),
-            child: buildTodoItem(
-                _todoList[index].task,
-                _todoList[index].category,
-                _todoList[index].place,
-                _todoList[index].time),
+            child: buildTodoItem(_todoList[index].task, _todoList[index].place,
+                _todoList[index].time, _todoList[index].category),
             onDismissed: (direction) {
-              // var item = _todoItems.elementAt(index).toString();
               var item = _todoList.elementAt(index);
-              setState(() {
-                // _todoItems.removeAt(index);
-                _todoList.removeAt(index);
-                Scaffold.of(context).showSnackBar(SnackBar(
-                  content: Text("Todo cancelled."),
-                  action: SnackBarAction(
-                    label: "UNDO",
-                    onPressed: () {
-                      setState(() {
-                        // _todoItems.insert(index, item);
-                        _todoList.insert(index, item);
-                      });
-                    },
-                  ),
-                ));
-              });
+              _deleteItem(index, item);
             },
           );
         }
