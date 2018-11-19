@@ -3,7 +3,7 @@ import '../widgets/add_todo_fab.dart';
 import '../widgets/custom_sliver.dart';
 import '../widgets/todo_item.dart';
 import 'add_todo.dart';
-import '../utils/todo_data.dart';
+import '../models/todo_data.dart';
 
 class TodoList extends StatefulWidget {
   @override
