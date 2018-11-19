@@ -1,117 +1,47 @@
 import 'package:flutter/material.dart';
-import '../utils/todo.dart';
+import '../widgets/add_todo_widgets.dart';
 
-class AddNewTodo extends StatelessWidget{
-  TodoListState todoListState = new TodoListState();
+class AddTodo extends StatelessWidget {
+  final Function _addTodoItem;
+  AddTodo(this._addTodoItem);
 
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(      
-        title: new Text("Add new todo"),
-      ),
-      body: new SingleChildScrollView(
-          child: new Container(
-        margin: const EdgeInsets.only(left: 30.0, right: 30.0),
-        child: new Column(
-          children: <Widget>[
-            new SizedBox(height: 50.0),
-            new Center(
-              child: new Container(
-                padding: const EdgeInsets.all(10.0),
-                decoration: new BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.blue,
-                ),
-                child: Icon(
-                  Icons.work,
-                  size: 50.0,
-                ),
+        appBar: new AppBar(
+          title: new Text("Add a new task"),
+          actions: <Widget>[
+            IconButton(
+              icon: new Icon(
+                Icons.tune,
+                semanticLabel: "reset",
               ),
-            ),
-            new SizedBox(height: 12.0),
-            new Container(
-              width: double.infinity,
-              child: DropdownButton<String>(
-                  value: "Business",
-                  items: <String>[
-                    "Business",
-                    "Personal",
-                  ].map((String value){ 
-                    return new DropdownMenuItem<String>(
-                      value: value,
-                      child: new Text(
-                        value,
-                        style: TextStyle(fontSize: 15.0),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState() {}
-                  },
-                  isExpanded: true,
-                  hint: new Text("Select Task Type")),
-            ),
-            new SizedBox(height: 12.0),
-            new TextField(
-              onSubmitted: (task) {                    
-                todoListState.addTodoItem(task);
-                Navigator.pop(context); //this line isnt working
-                print(task);
+              onPressed: () {
+                print("reset button pressed");
               },
-              maxLength: 25,
-              decoration: new InputDecoration(
-                suffixIcon: new Icon(Icons.work),
-                labelText: "Task",
-              ),
-            ),
-            new SizedBox(height: 12.0),
-            new TextField(              
-              maxLength: 50,
-              decoration: new InputDecoration(
-                suffixIcon: new Icon(Icons.place),
-                labelText: "Place",
-              ),
-            ),
-            new SizedBox(height: 12.0),
-            new GestureDetector(
-              onTap: () {
-                todoListState.selectTime(context);
-              },
-              child: Container(
-                color: Colors.transparent,
-                child: IgnorePointer(
-                  child: new TextField(
-                    decoration: new InputDecoration(
-                      suffixIcon: new Icon(Icons.calendar_today),
-                      labelText: todoListState.time.toString(),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            new SizedBox(
-              height: 12.0,
-            ),
-            new SizedBox(height: 30.0),
-            new ButtonTheme(
-                minWidth: double.infinity,
-                child: new RaisedButton(
-                    child: new Text(
-                      "ADD NEW TODO",
-                      style: new TextStyle(color: Colors.white),
-                    ),
-                    elevation: 4.0,
-                    padding: EdgeInsets.all(15.0),
-                    color: Colors.blue,
-                    splashColor: Colors.blueGrey,
-                    onPressed: () {
-                      print("ADD Button Clicked");
-                    }))
+            )
           ],
         ),
-      )),
-    );
+        body: new Container(
+          margin: const EdgeInsets.only(left: 30.0, right: 30.0),
+          child: new Column(
+            children: <Widget>[
+              new SizedBox(height: 50.0),
+              new Center(
+                child: categoryIcon(),
+              ),
+              new SizedBox(height: 12.0),
+              categoryDropdown(),
+              new SizedBox(height: 12.0),
+              TaskField(_addTodoItem, context).taskField(),
+              new SizedBox(height: 12.0),
+              placeField(),
+              new SizedBox(height: 12.0),
+              timeField(),
+              new SizedBox(height: 30.0),
+              addButton(),
+            ],
+          ),
+        ));
   }
 }
-

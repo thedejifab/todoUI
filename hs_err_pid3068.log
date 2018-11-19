@@ -1,0 +1,177 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 100663296 bytes for Failed to commit area from 0x00000000a1e00000 to 0x00000000a7e00000 of length 100663296.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (t:/workspace/hotspot/src/os/windows/vm/os_windows.cpp:3357), pid=3068, tid=4556
+#
+# JRE version:  (9.0+11) (build )
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (9.0.1+11, mixed mode, tiered, compressed oops, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Dorg.gradle.appname=gradlew org.gradle.wrapper.GradleWrapperMain -v
+
+Host: Intel(R) Core(TM) i3-7100U CPU @ 2.40GHz, 4 cores, 5G,  Windows 10 , 64 bit Build 17134 (10.0.17134.1)
+Time: Mon Nov 19 08:21:36 2018 W. Central Africa Standard Time elapsed time: 0 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00000292f4e97800):  JavaThread "Unknown thread" [_thread_in_vm, id=4556, stack(0x000000a7a3300000,0x000000a7a3400000)]
+
+Stack: [0x000000a7a3300000,0x000000a7a3400000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x5870b8]
+V  [jvm.dll+0x69c0ee]
+V  [jvm.dll+0x69d00a]
+V  [jvm.dll+0x69d643]
+V  [jvm.dll+0x21d148]
+V  [jvm.dll+0x584bf4]
+V  [jvm.dll+0x57a005]
+V  [jvm.dll+0x2cd46b]
+V  [jvm.dll+0x2cd3d3]
+V  [jvm.dll+0x2cd2a2]
+V  [jvm.dll+0x2cf2a3]
+V  [jvm.dll+0x319203]
+V  [jvm.dll+0x319916]
+V  [jvm.dll+0x319303]
+V  [jvm.dll+0x2adbf8]
+V  [jvm.dll+0x2aee37]
+V  [jvm.dll+0x67b1ed]
+V  [jvm.dll+0x67c5ac]
+V  [jvm.dll+0x3269c9]
+V  [jvm.dll+0x6653ee]
+V  [jvm.dll+0x391931]
+V  [jvm.dll+0x3938e1]
+C  [java.exe+0x34f1]
+C  [java.exe+0xe24f]
+C  [java.exe+0xe3f6]
+C  [KERNEL32.DLL+0x13034]
+C  [ntdll.dll+0x71461]
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x00000292f4eaf800 GCTaskThread "GC Thread#0" [stack: 0x000000a7a3400000,0x000000a7a3500000] [id=9676]
+  0x00000292f4eb1000 GCTaskThread "GC Thread#1" [stack: 0x000000a7a3500000,0x000000a7a3600000] [id=14268]
+  0x00000292f4eb2800 GCTaskThread "GC Thread#2" [stack: 0x000000a7a3600000,0x000000a7a3700000] [id=5476]
+  0x00000292f4eb6800 GCTaskThread "GC Thread#3" [stack: 0x000000a7a3700000,0x000000a7a3800000] [id=8284]
+  0x00000292f4f1a800 ConcurrentGCThread "G1 Main Marker" [stack: 0x000000a7a3d00000,0x000000a7a3e00000] [id=15276]
+  0x00000292f4f1b800 ConcurrentGCThread "G1 Marker#0" [stack: 0x000000a7a3e00000,0x000000a7a3f00000] [id=13236]
+  0x00000292f4ec5800 ConcurrentGCThread "G1 Refine#0" [stack: 0x000000a7a3b00000,0x000000a7a3c00000] [id=11516]
+  0x00000292f4ebf800 ConcurrentGCThread "G1 Refine#1" [stack: 0x000000a7a3a00000,0x000000a7a3b00000] [id=6808]
+  0x00000292f4ebe000 ConcurrentGCThread "G1 Refine#2" [stack: 0x000000a7a3900000,0x000000a7a3a00000] [id=2672]
+  0x00000292f4ebb000 ConcurrentGCThread "G1 Refine#3" [stack: 0x000000a7a3800000,0x000000a7a3900000] [id=5348]
+  0x00000292f4ec8800 ConcurrentGCThread "G1 Young RemSet Sampling" [stack: 0x000000a7a3c00000,0x000000a7a3d00000] [id=12060]
+
+=>0x00000292f4e97800 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=4556, stack(0x000000a7a3300000,0x000000a7a3400000)]
+
+Threads with active compile tasks:
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00000292f4e94c10] Heap_lock - owner thread: 0x00000292f4e97800
+
+Heap address: 0x00000000a1e00000, size: 1506 MB, Compressed Oops mode: Non-zero based: 0x00000000a1e00000
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff651cd0000 - 0x00007ff651d0e000 	C:\Program Files\Java\jdk-9.0.1\bin\java.exe
+0x00007ffee9a30000 - 0x00007ffee9c11000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffee7de0000 - 0x00007ffee7e92000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ffee6a70000 - 0x00007ffee6ce3000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ffee7880000 - 0x00007ffee7921000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ffee7340000 - 0x00007ffee73de000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ffee9930000 - 0x00007ffee998b000 	C:\WINDOWS\System32\sechost.dll
+0x00007ffee74f0000 - 0x00007ffee7614000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ffee7f00000 - 0x00007ffee8090000 	C:\WINDOWS\System32\USER32.dll
+0x00007ffee6ea0000 - 0x00007ffee6ec0000 	C:\WINDOWS\System32\win32u.dll
+0x00007ffee7310000 - 0x00007ffee7338000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ffee5eb0000 - 0x00007ffee6042000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ffee6760000 - 0x00007ffee67ff000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ffee6d50000 - 0x00007ffee6e4a000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ffed94f0000 - 0x00007ffed9759000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.17134.345_none_fb429a5930656358\COMCTL32.dll
+0x00007ffee40e0000 - 0x00007ffee40ea000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ffee79c0000 - 0x00007ffee7ce3000 	C:\WINDOWS\System32\combase.dll
+0x00007ffee69f0000 - 0x00007ffee6a6a000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007ffee8170000 - 0x00007ffee819d000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007ffec4370000 - 0x00007ffec445f000 	C:\Program Files\Java\jdk-9.0.1\bin\msvcr120.dll
+0x00007ffeda900000 - 0x00007ffeda9a6000 	C:\Program Files\Java\jdk-9.0.1\bin\msvcp120.dll
+0x00000000743c0000 - 0x0000000074de4000 	C:\Program Files\Java\jdk-9.0.1\bin\server\jvm.dll
+0x00007ffee8160000 - 0x00007ffee8168000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007ffed8190000 - 0x00007ffed8199000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ffee32f0000 - 0x00007ffee3313000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffee9990000 - 0x00007ffee99fc000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ffee32c0000 - 0x00007ffee32ea000 	C:\WINDOWS\SYSTEM32\winmmbase.dll
+0x00007ffee6e50000 - 0x00007ffee6e99000 	C:\WINDOWS\System32\cfgmgr32.dll
+0x00007ffee41d0000 - 0x00007ffee41df000 	C:\Program Files\Java\jdk-9.0.1\bin\verify.dll
+0x00007ffed78b0000 - 0x00007ffed78d7000 	C:\Program Files\Java\jdk-9.0.1\bin\java.dll
+0x00007ffeddde0000 - 0x00007ffedddf6000 	C:\Program Files\Java\jdk-9.0.1\bin\zip.dll
+0x00007ffee41b0000 - 0x00007ffee41ba000 	C:\Program Files\Java\jdk-9.0.1\bin\jimage.dll
+0x00007ffee4750000 - 0x00007ffee4919000 	C:\WINDOWS\SYSTEM32\dbghelp.dll
+
+VM Arguments:
+jvm_args: -Dorg.gradle.appname=gradlew 
+java_command: org.gradle.wrapper.GradleWrapperMain -v
+java_class_path (initial): C:\Users\Ayodeji Fabusuyi\Documents\Flutter\newapp\android\\gradle\wrapper\gradle-wrapper.jar
+Launcher Type: SUN_STANDARD
+
+Logging:
+Log output configuration:
+#0: stdout all=warning uptime,level,tags
+#1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk-9.0.1
+CLASSPATH=C:\Users\Ayodeji Fabusuyi\Documents\Flutter\newapp\android\\gradle\wrapper\gradle-wrapper.jar
+PATH=C:\Program Files\Haskell\bin;C:\Program Files\Haskell Platform\8.4.3\lib\extralibs\bin;C:\Program Files\Haskell Platform\8.4.3\bin;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Java\jdk-9.0.1;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Git\cmd;C:\Program Files\Java\jdk-9.0.1\bin;C:\Program Files\nodejs\;C:\Strawberry\c\bin;C:\Strawberry\perl\site\bin;C:\Strawberry\perl\bin;C:\Dwimperl\perl\bin;C:\Dwimperl\perl\site\bin;C:\Dwimperl\c\bin;C:\ProgramData\chocolatey\bin;C:\Flutter\flutter\bin;C:\Go\bin;C:\Users\Ayodeji Fabusuyi\AppData\Local\atom\bin;C:\Users\Ayodeji Fabusuyi\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\Haskell Platform\8.4.3\mingw\bin;C:\Program Files\PuTTY\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Apache\Maven\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Users\Ayodeji Fabusuyi\AppData\Roaming\cabal\bin;C:\Users\Ayodeji Fabusuyi\AppData\Roaming\local\bin;C:\Program Files\Java\jdk-9.0.1;C:\Users\Ayodeji Fabusuyi\Documents\Android\sdk;C:\Program Files\Java\jdk-9.0.1\bin;C:\Program Files\Microsoft VS Code\bin;C:\Users\Ayodeji Fabusuyi\AppData\Roaming\npm;C:\tools\dart-sdk\bin;C:\Users\Ayodeji Fabusuyi\AppData\Roaming\Pub\Cache\bin;C:\Users\Ayodeji Fabusuyi\go\bin;C:\Users\Ayodeji Fabusuyi\AppData\Local\Android\Sdk\platform-tools;C:\Users\Ayodeji Fabusuyi\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Apache\Maven\bin;C:\Users\Ayodeji Fabusuyi\AppData\Local\Programs\Microsoft VS Code\bin;C:\Flutter\flutter\bin;;C:\Flutter\flutter\bin\mingit\cmd
+USERNAME=Ayodeji Fabusuyi
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 142 Stepping 9, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10 , 64 bit Build 17134 (10.0.17134.1)
+
+CPU:total 4 (initial active 4) (2 cores per cpu, 2 threads per core) family 6 model 142 stepping 9, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, 3dnowpref, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2, adx, fma
+
+Memory: 4k page, physical 6161060k(822276k free), swap 7848612k(95480k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (9.0.1+11) for windows-amd64 JRE (9.0.1+11), built on Sep 28 2017 04:54:03 by "mach5one" with MS VC++ 12.0 (VS2013)
+
+END.
