@@ -3,6 +3,7 @@ import '../widgets/add_todo_fab.dart';
 import '../widgets/custom_sliver.dart';
 import '../widgets/todo_item.dart';
 import 'add_todo.dart';
+import '../utils/todo_data.dart';
 
 class TodoList extends StatefulWidget {
   @override
@@ -11,34 +12,44 @@ class TodoList extends StatefulWidget {
 
 class TodoListState extends State<TodoList> {
   List<String> _todoItems = [];
+  List<Todo> _todoList = [];
 
   void _addTodoItem(String task) {
     setState(() {
-      int index = _todoItems.length;
-      _todoItems.add(task);
+      int index = _todoList.length;
+      // _todoItems.add(task);
+      _todoList.add(
+          Todo(task: task, category: "Biz", place: "Ikorodu", time: "12:30pm"));
     });
   }
 
   Widget _buildTodoList() {
     return new ListView.builder(
       itemBuilder: (context, index) {
-        if (index < _todoItems.length) {
+        if (index < _todoList.length) {
           return Dismissible(
             background: _stackBehindDismiss(),
             direction: DismissDirection.endToStart,
-            key: ObjectKey(_todoItems[index]),
-            child: buildTodoItem(_todoItems[index]),
+            key: ObjectKey(_todoList[index]),
+            child: buildTodoItem(
+                _todoList[index].task,
+                _todoList[index].category,
+                _todoList[index].place,
+                _todoList[index].time),
             onDismissed: (direction) {
-              var item = _todoItems.elementAt(index).toString();
+              // var item = _todoItems.elementAt(index).toString();
+              var item = _todoList.elementAt(index);
               setState(() {
-                _todoItems.removeAt(index);
+                // _todoItems.removeAt(index);
+                _todoList.removeAt(index);
                 Scaffold.of(context).showSnackBar(SnackBar(
                   content: Text("Todo cancelled."),
                   action: SnackBarAction(
                     label: "UNDO",
                     onPressed: () {
                       setState(() {
-                        _todoItems.insert(index, item);
+                        // _todoItems.insert(index, item);
+                        _todoList.insert(index, item);
                       });
                     },
                   ),

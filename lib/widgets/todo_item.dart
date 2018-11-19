@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget buildTodoItem(String task) {
+Widget buildTodoItem(String task, String place, String time, String category) {
   return Container(
     padding: EdgeInsets.only(left: 20.0, right: 20.0),
     child: Column(
@@ -10,7 +10,7 @@ Widget buildTodoItem(String task) {
             task,
             style: TextStyle(fontWeight: FontWeight.w600),
           ),
-          subtitle: Text("Additional info about task"),
+          subtitle: Text(place),
           leading: Container(
             padding: const EdgeInsets.all(5.0),
             decoration: BoxDecoration(
@@ -22,7 +22,7 @@ Widget buildTodoItem(String task) {
               color: Colors.blue,
             ),
           ),
-          trailing: Text("9am"),
+          trailing: Text(time),
         ),
         Divider(color: Colors.grey)
       ],
