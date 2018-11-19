@@ -23,9 +23,33 @@ class TodoListState extends State<TodoList> {
     return new ListView.builder(
       itemBuilder: (context, index) {
         if (index < _todoItems.length) {
-          return buildTodoItem(_todoItems[index]);
+          return Dismissible( 
+            background: _stackBehindDismiss(),
+            direction: DismissDirection.endToStart,
+            key: Key(_todoItems[index]),           
+            child: buildTodoItem(_todoItems[index]),            
+            onDismissed: (direction){
+              _todoItems.removeAt(index);
+              Scaffold.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("Todo cancelled."),
+                )                
+              );              
+            },
+          );
         }
       },
+    );
+  }
+
+  Widget _stackBehindDismiss(){
+    return Container(
+      alignment: Alignment.centerRight,
+      padding: EdgeInsets.only(right: 20.0),
+      color: Colors.red,
+      child: Icon(
+        Icons.delete,
+        color: Colors.white,),
     );
   }
 
