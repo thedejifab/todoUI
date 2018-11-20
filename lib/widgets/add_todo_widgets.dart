@@ -73,6 +73,7 @@ class SubmitTodo extends StatelessWidget {
             splashColor: Colors.blueGrey,
             onPressed: () {
               _addTodoItem(taskController.text, placeController.text);
+              print("The time is ${timeController.text}");
               Navigator.pop(context);
             }));
   }
@@ -106,6 +107,7 @@ class TimeFieldState extends State<TimeField> {
 
     if (picked != _time && picked != null) {
       setState(() {
+        timeController.text = picked.toString();
         _time = picked;
       });
     }
@@ -120,7 +122,7 @@ class TimeFieldState extends State<TimeField> {
         color: Colors.transparent,
         child: IgnorePointer(
           child: new TextFormField(
-            controller: timeController,
+            controller: timeController,            
             decoration: new InputDecoration(
               suffixIcon: new Icon(Icons.calendar_today),
               labelText: _time.toString(),
