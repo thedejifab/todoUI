@@ -4,6 +4,7 @@ import '../widgets/custom_sliver.dart';
 import '../widgets/todo_item.dart';
 import 'add_todo.dart';
 import '../models/todo_data.dart';
+import '../database/database.dart' as database;
 
 class TodoList extends StatefulWidget {
   @override
@@ -13,7 +14,9 @@ class TodoList extends StatefulWidget {
 class TodoListState extends State<TodoList> {
   List<Todo> _todoList = [];
 
-  void _addTodoItem(String task, String place) {
+  void _addTodoItem(String task, String place, String time) {
+    database
+        .insertTodo(Todo(task: task, category: "Biz", place: place, time: "1"));
     setState(() {
       int index = _todoList.length;
       _todoList.add(
@@ -75,6 +78,12 @@ class TodoListState extends State<TodoList> {
   }
 
   Widget _pushAddTodoScreen() {
+    database.getTodos().then((value) {
+      for (int i = 0; i < value.length; i++) {
+        print('Todo at position $i is ${value.elementAt(i).task}');
+      }
+    });
+
     Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
       return AddTodo(_addTodoItem);
     }));
@@ -82,6 +91,8 @@ class TodoListState extends State<TodoList> {
 
   @override
   Widget build(BuildContext context) {
+    database.initDb();
+
     return new Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {

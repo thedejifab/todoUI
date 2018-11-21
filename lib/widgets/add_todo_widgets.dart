@@ -43,11 +43,11 @@ Widget categoryDropdown() {
 
 FocusNode textNode2 = new FocusNode();
 Widget taskField(context) {
-  return TextFormField(    
+  return TextFormField(
     autofocus: true,
     controller: taskController,
     decoration: InputDecoration(labelText: "Task"),
-    onFieldSubmitted: (String value){
+    onFieldSubmitted: (String value) {
       FocusScope.of(context).requestFocus(textNode2);
     },
   );
@@ -72,8 +72,7 @@ class SubmitTodo extends StatelessWidget {
             color: Colors.blue,
             splashColor: Colors.blueGrey,
             onPressed: () {
-              _addTodoItem(taskController.text, placeController.text);
-              print("The time is ${timeController.text}");
+              _addTodoItem(taskController.text, placeController.text, timeController.text);
               Navigator.pop(context);
             }));
   }
@@ -82,10 +81,10 @@ class SubmitTodo extends StatelessWidget {
   Widget build(BuildContext context) {}
 }
 
-Widget placeField() {  
+Widget placeField() {
   return TextFormField(
-    focusNode: textNode2,  
-    controller: placeController,  
+    focusNode: textNode2,
+    controller: placeController,
     decoration: InputDecoration(labelText: "Place"),
   );
 }
@@ -96,8 +95,7 @@ class TimeField extends StatefulWidget {
 }
 
 class TimeFieldState extends State<TimeField> {
-  TimeOfDay _time = new TimeOfDay.now();
-  String timeLabel = "Time";
+  static TimeOfDay _time = new TimeOfDay.now();
 
   Future<Null> selectTime(BuildContext context) async {
     final TimeOfDay picked = await showTimePicker(
@@ -105,15 +103,24 @@ class TimeFieldState extends State<TimeField> {
       initialTime: _time,
     );
 
-    if (picked != _time && picked != null) {
+    if (picked != null) {
       setState(() {
-        timeController.text = picked.toString();
-        _time = picked;
+        timeController.text = parseTime(picked);
+        _time = picked;        
       });
     }
   }
 
+  static String parseTime(TimeOfDay time) {
+    String hour = time.hourOfPeriod.toString();
+    String minute = time.minute.toString();
+    String hourTypeRaw = time.period.toString();
+    String hourType = hourTypeRaw.substring(hourTypeRaw.length - 2);
+    return "$hour:$minute $hourType";
+  }
+
   Widget build(BuildContext context) {
+    
     return GestureDetector(
       onTap: () {
         selectTime(context);
@@ -122,10 +129,10 @@ class TimeFieldState extends State<TimeField> {
         color: Colors.transparent,
         child: IgnorePointer(
           child: new TextFormField(
-            controller: timeController,            
+            controller: timeController,
             decoration: new InputDecoration(
               suffixIcon: new Icon(Icons.calendar_today),
-              labelText: _time.toString(),
+              labelText: "Time",
             ),
           ),
         ),
@@ -133,4 +140,3 @@ class TimeFieldState extends State<TimeField> {
     );
   }
 }
-
