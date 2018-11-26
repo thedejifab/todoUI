@@ -23,6 +23,36 @@ void _onCreate(Database db, int newVersion) async {
   print("Tables created");
 }
 
+void insertTodoAtIndex(Todo todo) async {
+  await db.transaction((transaction) async {
+    await transaction.rawInsert(
+        'INSERT INTO Todos(id, task, category, place, time ) VALUES(' +
+            '\'' +
+            todo.id.toString() +
+            '\'' +
+            ',' +
+            '\'' +
+            todo.task +
+            '\'' +
+            ',' +
+            '\'' +
+            todo.category +
+            '\'' +
+            ',' +
+            '\'' +
+            todo.place +
+            '\'' +
+            ',' +
+            '\'' +
+            todo.time +
+            '\'' +
+            ')'
+        );
+  });
+  print("TODO added");
+
+}
+
 void insertTodo(Todo todo) async {
   await db.transaction((transaction) async {
     await transaction.rawInsert(
@@ -50,20 +80,21 @@ void insertTodo(Todo todo) async {
 
 Future<List<Todo>> getTodos() async {
   List<Map> list = await db.rawQuery('SELECT * FROM Todos');
-  List<Todo> todos = new List();
+  List<Todo> todos = new List();  
 
   for (int i = 0; i < list.length; i++) {
     todos.add(new Todo(
         task: list[i]["task"],
         category: list[i]["category"],
-        place: list[i]["place"],
-        time: list[i]["time"]));
+        place: list[i]["place"],                
+        time: list[i]["time"],
+        id: list[i]["id"]));
   }
   return todos;
 }
 
 void deleteTodo(int id) async{
-  await db.rawDelete("DELETE FROM Todo WHERE id = ?", ['$id']);
+  await db.rawDelete("DELETE FROM Todos WHERE id = ?", ['$id']);
 }
 
 

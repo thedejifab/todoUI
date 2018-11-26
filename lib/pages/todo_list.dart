@@ -27,9 +27,12 @@ class TodoListState extends State<TodoList> {
 
   void fetchedTodos() async {
     await database.getTodos().then((value) {
+      for (Todo todo in value) {
+        print(todo.id);
+      }
       setState(() {
         _todoList = value;
-      });      
+      });
     });
   }
 
@@ -44,10 +47,14 @@ class TodoListState extends State<TodoList> {
   }
 
   void _deleteItem(index) {
-    _todoList.removeAt(index);
+    database.deleteTodo(_todoList[index].id);
+    setState(() {
+      _todoList.removeAt(index);
+    });
   }
 
   void _undoDeleteItem(index, item) {
+    database.insertTodoAtIndex(item);
     setState(() {
       _todoList.insert(index, item);
     });
