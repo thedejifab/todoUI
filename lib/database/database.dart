@@ -65,3 +65,5 @@ Future<List<Todo>> getTodos() async {
 void deleteTodo(int id) async{
   await db.rawDelete("DELETE FROM Todo WHERE id = ?", ['$id']);
 }
+
+

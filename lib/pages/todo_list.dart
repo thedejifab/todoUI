@@ -14,6 +14,25 @@ class TodoList extends StatefulWidget {
 class TodoListState extends State<TodoList> {
   List<Todo> _todoList = [];
 
+  @override
+  void initState() {
+    super.initState();
+    doFetch();
+  }
+
+  void doFetch() async {
+    await database.initDb();
+    fetchedTodos();
+  }
+
+  void fetchedTodos() async {
+    await database.getTodos().then((value) {
+      setState(() {
+        _todoList = value;
+      });      
+    });
+  }
+
   void _addTodoItem(String task, String place, String time) {
     database
         .insertTodo(Todo(task: task, category: "Biz", place: place, time: "1"));
@@ -35,7 +54,7 @@ class TodoListState extends State<TodoList> {
   }
 
   Widget _buildTodoList() {
-    return new ListView.builder(
+    return ListView.builder(
       itemBuilder: (context, index) {
         if (index < _todoList.length) {
           return Dismissible(
@@ -78,12 +97,6 @@ class TodoListState extends State<TodoList> {
   }
 
   Widget _pushAddTodoScreen() {
-    database.getTodos().then((value) {
-      for (int i = 0; i < value.length; i++) {
-        print('Todo at position $i is ${value.elementAt(i).task}');
-      }
-    });
-
     Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
       return AddTodo(_addTodoItem);
     }));
@@ -91,8 +104,6 @@ class TodoListState extends State<TodoList> {
 
   @override
   Widget build(BuildContext context) {
-    database.initDb();
-
     return new Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
